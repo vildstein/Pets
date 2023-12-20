@@ -123,7 +123,7 @@ void LittleFibo::calculateClicked()
 {
     double first_prize = spinboxFirstPrise -> text().toDouble();
     double second_prize = spinboxSecondPrise -> text().toDouble();
-    double result(0);
+    double *result = new double(0);
 
     bool first_prize_greatter_then_second_prize = first_prize > second_prize;
     bool second_prize_greatter_then_first_prize = first_prize < second_prize;
@@ -136,22 +136,22 @@ void LittleFibo::calculateClicked()
         {
             if (first_prize_greatter_then_second_prize)
             {
-                result = first_prize + (first_prize - second_prize) * Constants::ratio_1_618;
+                *result = first_prize + (first_prize - second_prize) * Constants::ratio_1_618;
             }
             else if (second_prize_greatter_then_first_prize)
             {
-                result = second_prize + (second_prize - first_prize) * Constants::ratio_1_618;
+                *result = second_prize + (second_prize - first_prize) * Constants::ratio_1_618;
             }
         }
         else if (radioButton0618 -> isChecked()) //radioButton_2 = 0.618
         {
             if (first_prize_greatter_then_second_prize)
             {
-                result = first_prize + (first_prize - second_prize) * Constants::ratio_0_618;
+                *result = first_prize + (first_prize - second_prize) * Constants::ratio_0_618;
             }
             else if (second_prize_greatter_then_first_prize)
             {
-                result = second_prize + (second_prize - first_prize) * Constants::ratio_0_618;
+                *result = second_prize + (second_prize - first_prize) * Constants::ratio_0_618;
             }
         }
         break;
@@ -160,22 +160,22 @@ void LittleFibo::calculateClicked()
         {
             if (first_prize_greatter_then_second_prize)
             {
-                result = second_prize - (first_prize - second_prize) * Constants::ratio_1_618;
+                *result = second_prize - (first_prize - second_prize) * Constants::ratio_1_618;
             }
             else if (second_prize_greatter_then_first_prize)
             {
-                result = first_prize - (second_prize - first_prize) * Constants::ratio_1_618;
+                *result = first_prize - (second_prize - first_prize) * Constants::ratio_1_618;
             }
         }
         else if (radioButton0618 -> isChecked()) //radioButton_2 = 0.618
         {
             if (first_prize_greatter_then_second_prize)
             {
-                result = second_prize - (first_prize - second_prize) * Constants::ratio_0_618;
+                *result = second_prize - (first_prize - second_prize) * Constants::ratio_0_618;
             }
             else if (second_prize_greatter_then_first_prize)
             {
-                result = first_prize - (second_prize - first_prize) * Constants::ratio_0_618;
+                *result = first_prize - (second_prize - first_prize) * Constants::ratio_0_618;
             }
         }
 
@@ -183,7 +183,11 @@ void LittleFibo::calculateClicked()
     }
 
 
-    resultLabel -> setText(QString::number(result));
+    resultLabel -> setText(QString::number(*result));
+
+
+    delete result;
+    result = nullptr;
 
 }
 
